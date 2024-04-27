@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     DB_USER: str
     DB_PASS: str
     DB_NAME: str
+    SECRET: str
 
     @property
     def DB_URL_psy(self):
@@ -18,6 +19,9 @@ class Settings(BaseSettings):
     def DB_URL_apsy(self):
         return f'postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
 
+    @property
+    def JWT_SECRET(self):
+        return f'{self.SECRET}'
     model_config = SettingsConfigDict(env_file='.env')
 
 settings = Settings()
